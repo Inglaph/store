@@ -1,0 +1,87 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Dependencias
+/node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Angular
+/dist
+/tmp
+/out-tsc
+/bazel-out
+.angular
+
+# IDEs y editores
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de ambiente
+/src/environments/*.js
+/src/environments/*.js.map
+
+# Archivos de compilación
+*.js.map
+*.js.map
+*.css.map
+
+# Archivos de pruebas y cobertura
+/coverage
+/libpeerconnection.log
+testem.log
+
+# Archivos temporales del sistema
+.sass-cache/
+connect.lock
+/typings
+
+# Archivos de configuración local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Archivos específicos de Angular
+.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# Archivos de producción
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Otros archivos y carpetas
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

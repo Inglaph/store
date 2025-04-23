@@ -1,0 +1,11 @@
+node_modules
+.env
+
+# Angular
+dist
+
+# Angular CLI
+node_modules
+
+# env
+/env
