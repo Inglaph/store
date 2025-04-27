@@ -1,0 +1,183 @@
+@use 'sass:map';
+@use 'sass:color';
+//---------------------------------
+//- Variables globales
+//---------------------------------
+/// @group general
+/// @description Color primario
+$color-general: (
+    "primary": #00f7ff,
+    "secondary": #6c757d,
+    "dark": #121760,
+    "light": #ffffff,
+    "gray": #a7a0a0,
+    "header-background": rgba(21, 20, 20, 0.26),
+    "color-prueba": #030814,
+);
+
+
+
+/// @group general
+/// @description Color de fondo del footer
+$color-gradient: (
+    "background": linear-gradient(to bottom,
+        color.adjust(map.get($color-general, "dark"), $lightness: -10%),
+        color.adjust(map.get($color-general, "dark"), $lightness: -15%)),
+);
+
+
+
+/// @group general
+/// @description Familia de fuentes y tamaño de la fuente
+/// @param {string} $principal - Familia de fuentes principal
+/// @param {string} $secundaria - Familia de fuentes secundaria
+/// @param {string} $tamanio - Tamaño de la fuente  
+/// @param {string} $color-texto - Color de la fuente
+$fonts-general: (
+    "principal": 'Poppins',
+    "secundaria": 'Arial',
+    "tamanio": 1.6rem,
+    "color-texto": #333,
+);
+
+
+
+
+
+//---------------------------------
+//- Tablas
+//---------------------------------
+/// @group tablas
+/// @description Colores de fondo de las columnas o filas de la tabla
+$colores-interlineado-tabla : ("par": #fccccc,
+    "impar": #d9cece,
+);
+
+/// @group tablas
+/// @description Interlineado de las columnas o filas de las tablas en px 
+$interlineado-tabla : ("par": 1.5,
+    "impar": 1.5,
+);
+
+/// @group tablas
+/// @description Número de columnas de la tabla
+$table-columns-rows: (
+    "columnas": 12,
+    "filas": 12,
+);
+
+
+//---------------------------------
+//- Layout
+//---------------------------------
+/// @group layout
+/// @description padding del container
+/// @param {string} $padding - padding del container
+/// @param {string} $margin - margin del container
+/// @param {string} $width - ancho del container
+/// @param {string} $max-width - ancho máximo del contenedor
+/// @param {string} $width-mobile - ancho del container en mobile
+/// @param {string} $width-tablet - ancho del container en tablet
+/// @param {string} $width-desktop - ancho del container en desktop
+/// @param {string} $width-desktop-large - ancho del container en desktop grande
+/// @param {string} $width-container-mobile - ancho del container en mobile
+/// @param {string} $width-container-tablet - ancho del container en tablet
+/// @param {string} $width-container-desktop - ancho del container en desktop
+/// @param {string} $width-container-desktop-large - ancho del container en desktop grande
+$container-layout : ("padding": 100px 0,
+    "margin": 20px,
+    "width": 100%, // Ancho total de la página
+    "max-width": 1600px, // Ancho máximo del contenedor
+    "width-mobile": 100%,
+    "width-tablet": 100%,
+    "width-desktop": 1200px,
+    "width-desktop-large": 1400px,
+    "margin-top": 300px,
+);
+
+/// @group layout
+/// @description ancho de la pantalla para movil
+/// @param {string} $movil - ancho de la pantalla para movil
+/// @param {string} $tablet - ancho de la pantalla para tablet
+/// @param {string} $desktop - ancho de la pantalla para desktop
+/// @param {string} $desktop-large - ancho de la pantalla para desktop grande
+/// @example
+/// @include movil(100%);
+/// @include tablet(100%);
+$breakpoints-layout: (
+    "movil": 480px,
+    "tablet": 900px,
+    "desktop": 1024px,
+    "desktop-large": 1440px,
+);
+
+
+
+//---------------------------------
+//- Botones
+//---------------------------------
+/// @group botones
+/// @description Color de fondo del botón       
+/// @param {string} $primario - Color primario
+/// @param {string} $secundario - Color secundario
+$buttons-color: (
+    "primario": #007bff,
+    "secundario": #6c757d,
+    "cta": #fff,
+    "cta-hover": #0056b3,
+);
+
+$buttons-cta: (
+    "color": #fff,
+    "hover": #0056b3,
+    "active": #0056b3,
+    "visited": #0056b3,
+    "border": none,
+    "border-radius": 5px,
+    "padding": 10px 20px,
+    "cursor": pointer,
+    "font-size": 1.6rem,
+    "font-weight": 600,
+    "text-transform": uppercase,
+    "transition": all 0.3s ease,
+    "background-color": #007bff,
+
+);
+
+
+
+//---------------------------------
+//- links
+//---------------------------------
+/// @group links
+/// @description Color de fondo del link
+$color-link: #007bff;
+
+
+
+
+
+
+//---------------------------------
+//- Reset
+//---------------------------------
+/// @group general
+/// @description reset inicial
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+
+/// @group general
+/// @description Estilos del body
+body {
+    font-family: map.get($fonts-general, "principal");
+    font-size: map.get($fonts-general, "tamanio");
+    color: map.get($fonts-general, "color-texto");
+}

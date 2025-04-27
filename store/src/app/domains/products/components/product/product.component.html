@@ -1,0 +1,12 @@
+<article class="product">
+    <div class="product-image">
+        <img [src]="image" [alt]="title" />
+    </div>
+    <div class="product-content">
+        <h2>{{ title }}</h2>
+        <p class="price">${{ price }}</p>
+        <button (click)="addToCartHandler()">Agregar al carrito</button>
+    </div>
+    <div class="product-badge" *ngIf="isNew">Nuevo</div>
+
+</article>

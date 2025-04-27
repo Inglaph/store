@@ -1,0 +1,8 @@
+@use 'stylesLap' as *;
+@use 'sass:map';
+@use 'sass:color';
+
+.list-component {
+    @include grid-container(3, 4rem);
+    background-color: color.adjust(map.get($color-general, 'primary'), $lightness: -10%);
+}

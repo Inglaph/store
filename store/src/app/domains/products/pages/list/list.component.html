@@ -1,0 +1,5 @@
+<section class="list-component">
+    @for (product of products; track product.id) {
+        <app-product [image]="product.image" [title]="product.title" [price]="product.price" (addToCart)="fromChild($event)"></app-product>
+    }
+</section>

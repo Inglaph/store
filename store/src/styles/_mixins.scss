@@ -1,0 +1,315 @@
+@use '_variables' as *;
+@use 'sass:map';
+@use 'sass:color';
+//---------------------------------
+//- mixin flexible-container
+//---------------------------------
+/// @group layout
+/// @description Establece un contenedor flexible con propiedades de flexbox.
+/// @param {string} $dis - Tipo de display (ej. flex, block)
+/// @param {string} $direccion - Dirección del flujo (ej. row, column)
+/// @param {string} $corte - Tipo de corte (ej. nowrap, wrap)
+/// @param {string} $just - Alineación en el eje principal (ej. center, space-between)
+/// @param {string} $align - Alineación en el eje transversal (ej. center, stretch)
+/// @param {number} $gap - Espacio entre los elementos flexibles
+/// @param {number} $padding - Espacio interno (padding) por defecto 0
+/// @param {number} $margin - Espacio externo (margin) por defecto 0
+
+@mixin flexible-container (
+    $dis, //display
+    $direccion, //direccion 
+    $corte, //corte
+    $just, //justificacion
+    $align, //alineacion
+    $gap, //espacio
+    $padding: 20px, //padding
+    $margin: 20px //margin
+    ) {
+    display: $dis;
+    flex-flow: $direccion $corte;
+    justify-content: $just;
+    align-items: $align;
+    gap: $gap;
+    width: map.get($container-layout, "width");
+    padding: $padding;
+    margin-top: $margin;
+    margin-bottom: $margin;
+
+    @media (max-width: 768px) {
+        //tablet
+        flex-flow: $direccion $corte;
+        justify-content: $just;
+        align-items: $align;
+    }
+
+    @media (max-width: 480px) {
+        //movil
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: map.get($container-layout, "width-mobile");
+        padding: 10px;
+    }
+}
+
+
+//---------------------------------
+//- mixin flex-item
+//---------------------------------
+/// @group layout
+/// @description Establece un elemento flexible con propiedades de flexbox.
+/// @param {string} $width - Ancho del elemento
+/// @param {string} $height - Alto del elemento
+/// @param {number} $padding - Espacio interno (padding) por defecto 0
+/// @param {number} $margin - Espacio externo (margin) por defecto 0
+/// @example
+/// @include flex-item(100%, 100%, 0, 0);
+@mixin flex-item ($width, $height, $padding: 0, $margin: 0) {
+    display: block;
+    width: $width;
+    height: $height;
+    padding: $padding;
+    margin: $margin;
+}
+
+
+
+//---------------------------------
+//- mixin grid-container
+//---------------------------------
+/// @group layout
+/// @description Establece un contenedor de grid con propiedades de grid.
+/// @param {number} $columnas - Número de columnas
+/// @param {string} $gap - Espacio entre los elementos de la grid
+/// 
+@mixin grid-container ($columnas, $gap) {
+    display: grid;
+    grid-template-columns: repeat($columnas, 1fr);
+    gap: $gap;
+
+    @media (max-width: 768px) {
+        //tablet
+        grid-template-columns: 1fr;
+        gap: 0em;
+    }
+
+    @media (max-width: 480px) {
+        //movil
+        grid-template-columns: 1fr;
+        gap: 0em;
+    }
+}
+
+
+
+//---------------------------------
+//- mixin grid-item
+//---------------------------------
+/// @group layout
+/// @description Establece un elemento de grid con propiedades de grid.
+/// @param {string} $width - Ancho del elemento
+/// @param {string} $height - Alto del elemento
+@mixin grid-item ($width, $height) {
+    display: grid;
+    grid-template-columns: $width;
+    grid-template-rows: $height;
+}
+
+
+
+
+/// @group responsive
+/// @description Establece un elemento responsive con propiedades de responsive.
+/// @param {string} $media - Media query
+/// @param {string} $content - Contenido del elemento
+@mixin responsive ($media, $content) {
+    @media (max-width: $media) {
+        @content;
+    }
+}
+
+//---------------------------------
+//- mixin responsive-container
+//---------------------------------
+/// @group responsive
+/// @description Establece un contenedor responsive
+/// @param {string} $margin - Margen del contenedor
+/// @param {string} $padding - Padding del contenedor
+/// @param {string} $width - Ancho del contenedor
+/// @param {string} $height - Alto del contenedor
+/// @param {string} $width-mobile - Ancho del contenedor en mobile
+/// @param {string} $height-mobile - Alto del contenedor en mobile
+/// @param {string} $width-tablet - Ancho del contenedor en tablet
+/// @param {string} $height-tablet - Alto del contenedor en tablet
+/// @param {string} $width-desktop - Ancho del contenedor en desktop
+/// @param {string} $height-desktop - Alto del contenedor en desktop
+/// @example
+/// @include responsive-container(
+///     $margin,
+///     $padding,
+///     $width : map-get($container-layout, "width"),
+///     $max-width : map-get($container-layout, "max-width"),
+///     $height : 100%,
+///     $width-mobile : 100%,
+///     $height-mobile : 100%, $width-tablet : 100%, $height-tablet : 100%, $width-desktop : 100%, $height-desktop : 100%) {
+///     // Contenido del contenedor
+/// }
+@mixin responsive-container ($margin, $padding, $width : map-get($container-layout, "width"), $max-width : map-get($container-layout, "max-width"), $height : 100%, $width-mobile : 100%, $height-mobile : 100%, $width-tablet : 100%, $height-tablet : 100%, $width-desktop : 100%, $height-desktop : 100%) {
+    margin: $margin;
+    padding: $padding;
+    width: $width;
+    max-width: $max-width;
+    height: $height;
+
+    @media (max-width: 768px) {
+        //tablet
+        width: $width-tablet;
+        height: $height-tablet;
+    }
+
+    @media (max-width: 480px) {
+        //movil
+        width: $width-mobile;
+        height: $height-mobile;
+    }
+}
+
+
+//---------------------------------
+//- mixin a-link
+//---------------------------------
+/// @group links
+/// @description Establece un enlace con propiedades de a.
+/// @param {color} $color - Color del enlace por defecto #333333 
+/// @param {color} $hover - Color del enlace al pasar el mouse por encima por defecto #007BFF
+/// @param {color} $active - Color del enlace al hacer click por defecto #0056b3
+/// @param {color} $visited - Color del enlace después de haber sido visitado por defecto #6c757d
+@mixin a-link ($color : #333333, $hover : #007BFF, $active : #0056b3, $visited : #6c757d) {
+    text-decoration: none;
+    color: $color;
+
+    &:hover {
+        color: $hover;
+    }
+
+    &:active {
+        color: $active;
+    }
+
+    &:visited {
+        color: $visited;
+    }
+
+}
+
+//---------------------------------
+//- mixin neo
+//---------------------------------
+/// @group layout
+/// @description Establece un elemento neo con propiedades de neo.
+/// @param {number} $radius - Radio del elemento
+/// @param {string} $eje - Eje del elemento
+/// @param {color} $color - Color del elemento
+/// @param {color} $color-shadow1 - Color del sombra 1
+/// @param {color} $color-shadow2 - Color del sombra 2
+@mixin neo ($radius, $eje, $color, $color-shadow1: color.adjust($color, $lightness: -20%), $color-shadow2: color.adjust($color, $lightness: 20%)) {
+    border-radius: $radius;
+    background: $color;
+    box-shadow:
+        if($eje =='y',
+            0 -5px 15px $color-shadow1,
+            5px 0 15px $color-shadow1 ),
+        if($eje =='y',
+            0 5px 15px $color-shadow2,
+            -5px 0 15px $color-shadow2 );
+}
+
+//---------------------------------
+//- mixin button-primary
+//---------------------------------
+/// @group buttons
+/// @description Establece un botón primario con propiedades de botón.
+/// @param {string} $color - Color del botón
+/// @param {string} $hover - Color del botón al pasar el mouse por encima
+/// @param {string} $active - Color del botón al hacer click
+/// @param {string} $visited - Color del botón después de haber sido visitado
+@mixin button-cta ($color, $border, $border-radius, $padding, $cursor, $font-size, $font-weight, $text-transform, $transition, $background-color) {
+    background: $background-color;
+    color: $color;
+    border: $border;
+    border-radius: $border-radius;
+    padding: $padding;
+    cursor: $cursor;
+    font-size: $font-size;
+    font-weight: $font-weight;
+}
+
+//---------------------------------
+//- mixin gradient-line
+//---------------------------------
+/// @group layout
+/// @description Establece un elemento gradient-line con propiedades de gradient-line.
+/// @param {color} $color1 - Color del gradient-line 1
+/// @param {color} $color2 - Color del gradient-line 2
+/// @param {number} $height - Alto del gradient-line
+/// @param {number} $offset - Desplazamiento del gradient-line
+/// @param {number} $width - Ancho del gradient-line
+/// @example
+/// @include gradient-line(map.get($color-general, "primary"), map.get($color-general, "secondary"));
+@mixin gradient-line ($color1, $color2, $height: 2px, $offset: -5px, $width: 100%) {
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: $offset;
+        left: 0;
+        width: $width;
+        height: $height;
+        background: linear-gradient(90deg,
+                $color1 0%,
+                $color2 100%);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+}
+
+//---------------------------------
+//- mixin text-style
+//---------------------------------
+/// @group text
+/// @description Establece un estilo de texto con propiedades de texto.
+/// @param {number} $font-size - Tamaño de la fuente
+/// @param {number} $font-weight - Peso de la fuente
+/// @param {color} $color - Color del texto
+/// @param {string} $text-align - Alineación del texto
+/// @param {string} $text-transform - Transformación del texto
+/// @param {string} $text-decoration - Decoración del texto
+/// @param {string} $text-shadow - Sombra del texto
+/// @param {string} $text-transform - Transformación del texto
+/// @example
+/// @include text-style(1rem, 400, map.get($color-general, "primary"), center, none, none, none, none);
+@mixin text-style ($font-size, $font-weight, $color, $text-align, $text-transform, $text-decoration, $text-shadow) {
+    font-size: $font-size;
+    font-weight: $font-weight;
+    color: $color;
+    text-align: $text-align;
+    text-transform: $text-transform;
+    text-decoration: $text-decoration;
+    text-shadow: $text-shadow;
+}   
+
+
+//---------------------------------
+//- mixin movil
+//---------------------------------
+/// @group layout
+/// @description un media screen para movil, con el ancho de 480px por defecto
+/// @param {number} $width - Ancho del contenedor
+/// @example
+/// @include movil(100%);
+@mixin movil ($width: 480px) {
+    @media (max-width: $width) {
+        @content;
+    }
+}
+

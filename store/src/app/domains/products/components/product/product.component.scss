@@ -1,0 +1,68 @@
+@use 'sass:map';
+@use 'stylesLap' as *;
+
+.product {
+    @include neo(10px, 'y', map.get($color-general, 'primary'));
+    max-width: 300px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 1/1;
+
+        img {
+            @apply w-full h-full object-cover;
+            transition: transform 0.3s ease;
+        }
+
+        &:hover img {
+            transform: scale(1.05);
+        }
+    }
+
+    .product-content {
+        padding: 1.5rem;
+
+        h2 {
+            @apply text-xl font-semibold mb-2;
+            color: map.get($color-general, 'text');
+        }
+
+        .price {
+            @apply text-2xl font-bold mb-4;
+            color: map.get($color-general, 'primary');
+        }
+
+        button {
+            @apply w-full bg-blue-600 text-white px-4 py-3 rounded-lg border-none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+
+            &:hover {
+                @apply bg-blue-700;
+                transform: translateY(-2px);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
+    }
+
+    .product-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        @apply bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold;
+        z-index: 10;
+    }
+}

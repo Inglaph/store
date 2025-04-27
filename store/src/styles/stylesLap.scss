@@ -1,0 +1,19 @@
+/// @group styles
+/// @description Estilos globales
+/// @author inglaph
+/// @access public
+
+/// @group general
+/// @description Importo los archivos de estilos
+@forward '_variables';
+@forward '_mixins';
+@forward '_functions';
+
+// Importo la fuente de Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+
+// Importo Tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
