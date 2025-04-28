@@ -3,10 +3,10 @@
 
 .product {
     @include neo(10px, 'y', map.get($color-general, 'primary'));
-    max-width: 300px;
+    max-width: 500px;
     transition: all 0.3s ease;
-    overflow: hidden;
-    position: relative;
+    overflow: hidden; /* para que no se desborde el contenido */
+    position: relative; /* para que el badge este en la parte superior */
 
     &:hover {
         transform: translateY(-5px);

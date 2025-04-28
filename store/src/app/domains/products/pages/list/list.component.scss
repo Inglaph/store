@@ -5,4 +5,8 @@
 .list-component {
     @include grid-container(3, 4rem);
     background-color: color.adjust(map.get($color-general, 'primary'), $lightness: -10%);
+
+    @media (max-width: map.get($breakpoints-layout, 'tablet')) {
+        @include grid-container(2, 2rem);
+    }
 }
